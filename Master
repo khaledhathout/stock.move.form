@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<form string="Stock Moves" create="0" edit="0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,assigned,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <group>
+                        <group name="main_grp" colspan="2">
+                            <group name="main_grp_col1">
+                                <field name="reference"/>
+                                <field name="location_id"/>
+                                <field name="location_dest_id"/>
+                            </group>
+                            <group name="main_grp_col2">
+                                <field name="product_id"/>
+                                <label for="product_uom_qty"/>
+                                <div class="o_row">
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom" options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
+                                </div>
+                                <field name="name" invisible="1"/>
+                                <field name="date_expected" invisible="1"/>
+                                <field name="date" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                            </group>
+                        </group>
+                        <group name="origin_grp" string="Origin">
+                            <field name="origin"/>
+                            <field name="group_id"/>
+                            <field name="procure_method" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="stock.group_adv_location"/>
+                        </group>
+                        <group name="linked_group" string="Linked Moves" groups="base.group_no_one" colspan="2">
+                            <field name="move_orig_ids" string="Origin Moves" readonly="1">
+                                <tree>
+                                    <field name="location_id"/>
+                                    <field name="location_dest_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                            <field name="move_dest_ids" string="Destination Moves" readonly="1">
+                                <tree>
+                                    <field name="location_id"/>
+                                    <field name="location_dest_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            
